@@ -180,6 +180,7 @@ The band above the prompt:
 ### Gotchas
 
 - **Keep a local checkout where it is** (only if you installed from one). A folder marketplace runs the band straight from that folder, so moving or deleting it breaks the band. After pulling changes, run `/reload-plugins` (and `./install-claude.sh` when the version in `.claude-plugin/plugin.json` changed). A GitHub install copies the repo and is unaffected.
+- **Switching install source starts a fresh count.** Claude Code keeps a plugin's store per install, so moving from a local checkout to the GitHub install (or back) starts the band's totals over. Open sessions are then read back from their transcripts, subject to the 4 MiB limit below.
 - **When it updates.** After each turn, not while Claude is replying. In a new session the water figure appears after the first reply; until then the band shows model, context and cost only.
 - **Sessions older than the band.** A session begun before the band was installed (or resumed from another machine) is read back from its transcript once. Claude Code lets a plugin read at most 4 MiB at a time, so a longer transcript cannot be read back: the band then counts from that point on and shows the total as a lower bound (`≥ 1.20 L`). Backfill reads the main transcript only, so earlier subagent work is not included.
 - **Organizations with managed settings.** Where an organization manages Claude Code, installed plugins do not receive compaction events, so compaction calls go uncounted (`claude plugin validate .` says so). Turns are counted either way.

@@ -1,13 +1,17 @@
 {
   "name": "water-bar",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "Estimate the water consumed by the current OpenCode session from token usage (sidebar section + water_bar tool). The repo root is the plugin root; the estimator is ./core.",
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./tui": "./src/tui.tsx"
+    "./server": "./src/index.ts",
+    "./tui": "./dist/tui.js"
+  },
+  "scripts": {
+    "build:tui": "node scripts/build-tui.mjs"
   },
   "keywords": [
     "opencode",
@@ -36,6 +40,8 @@
     "@opentui/keymap": "^0.5.0",
     "@opentui/solid": "^0.5.1",
     "@types/node": "^24.0.0",
+    "esbuild": "^0.28.0",
+    "esbuild-plugin-solid": "^0.6.0",
     "solid-js": "^1.9.0",
     "typescript": "^5.6.0"
   }

@@ -1,6 +1,6 @@
 {
   "name": "water-bar",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Band above the prompt with this session's estimated water use, model, context, cost and a region picker.",
   "author": { "name": "tesarwijaya" },
   "types": "./types/index.d.ts"
