@@ -93,27 +93,11 @@ water-bar/                 # the repo root is the plugin root for BOTH hosts
 
 ## Install — OpenCode
 
-Requires OpenCode ≥ 1.17. The plugin is an npm-compatible Git spec, so OpenCode clones it at startup and wires up both the `water_bar` tool and the sidebar section.
+Requires OpenCode ≥ 1.17.
 
-Add it to both config files:
+### OpenCode v1 (≤ 1.19)
 
-```jsonc
-// in both opencode.json(c) and tui.json
-{ "plugin": ["github:tesarwijaya/water-bar"] }
-```
-
-On OpenCode v2 you can let the CLI do it instead:
-
-```bash
-opencode plugin add github:tesarwijaya/water-bar
-```
-
-Then **restart OpenCode**. The `Water Usage` section appears under `Context` in the sidebar whenever a session is open.
-
-Override the config directory with `OPENCODE_CONFIG_DIR=/path/to/config` if needed.
-
-<details>
-<summary>Installing from a local checkout instead</summary>
+Install from a local checkout — on v1 the sidebar only renders for a `file://` plugin:
 
 ```bash
 git clone https://github.com/tesarwijaya/water-bar.git
@@ -121,9 +105,26 @@ cd water-bar
 ./install-opencode.sh
 ```
 
-The installer is idempotent and points both config files at the checkout (`file://…/water-bar`), plus ensures the `@opencode-ai/plugin` dependency in `~/.config/opencode/package.json`.
+The installer is idempotent: it points both config files at the checkout (`file://…/water-bar`) and ensures the `@opencode-ai/plugin` dependency in `~/.config/opencode/package.json`. Then **restart OpenCode**; the `Water Usage` section appears under `Context` whenever a session is open.
 
-</details>
+> **Don't install v1 from GitHub.** A `github:`/npm spec (`{ "plugin": ["github:tesarwijaya/water-bar"] }`) loads the `water_bar` **tool** but not the sidebar: OpenCode installs package TUI plugins under `node_modules`, where their `@opentui/solid` import resolves to a separate renderer instance (opencode#33885), so the panel silently never shows. The local checkout sidesteps it.
+
+### OpenCode v2
+
+Install straight from GitHub — the CLI clones the repo and patches both config files:
+
+```bash
+opencode plugin add github:tesarwijaya/water-bar
+```
+
+Or add the spec by hand:
+
+```jsonc
+// in both opencode.json(c) and tui.json
+{ "plugin": ["github:tesarwijaya/water-bar"] }
+```
+
+Override the config directory with `OPENCODE_CONFIG_DIR=/path/to/config` if needed.
 
 ## Install — Claude Code
 
