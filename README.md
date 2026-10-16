@@ -93,29 +93,19 @@ water-bar/                 # the repo root is the plugin root for BOTH hosts
 
 ## Install — OpenCode
 
-Requires OpenCode ≥ 1.17. The plugin ships as npm-compatible Git; the exact command depends on your major version.
+Requires OpenCode ≥ 1.17. The plugin is an npm-compatible Git spec, so OpenCode clones it at startup and wires up both the `water_bar` tool and the sidebar section.
 
-### OpenCode v2
-
-Install straight from GitHub. OpenCode clones the repo and patches your config for you — the `water_bar` tool into `opencode.json(c)`, the sidebar section into `tui.json`:
-
-```bash
-opencode plugin add github:tesarwijaya/water-bar
-```
-
-### OpenCode v1 (≤ 1.19)
-
-v1 has no Git installer. Either install the published package:
-
-```bash
-opencode plugin water-bar
-```
-
-or point your config at a local checkout — this is what `install-opencode.sh` automates:
+Add it to both config files:
 
 ```jsonc
 // in both opencode.json(c) and tui.json
-{ "plugin": ["file:///absolute/path/to/water-bar"] }
+{ "plugin": ["github:tesarwijaya/water-bar"] }
+```
+
+On OpenCode v2 you can let the CLI do it instead:
+
+```bash
+opencode plugin add github:tesarwijaya/water-bar
 ```
 
 Then **restart OpenCode**. The `Water Usage` section appears under `Context` in the sidebar whenever a session is open.
@@ -123,7 +113,7 @@ Then **restart OpenCode**. The `Water Usage` section appears under `Context` in 
 Override the config directory with `OPENCODE_CONFIG_DIR=/path/to/config` if needed.
 
 <details>
-<summary>Installing from a local checkout (both versions)</summary>
+<summary>Installing from a local checkout instead</summary>
 
 ```bash
 git clone https://github.com/tesarwijaya/water-bar.git
@@ -131,11 +121,7 @@ cd water-bar
 ./install-opencode.sh
 ```
 
-The installer is idempotent and wires the same three things up:
-
-- `~/.config/opencode/tui.json` → the sidebar plugin
-- `~/.config/opencode/opencode.json(c)` → the `water_bar` tool
-- `~/.config/opencode/package.json` → the `@opencode-ai/plugin` dependency
+The installer is idempotent and points both config files at the checkout (`file://…/water-bar`), plus ensures the `@opencode-ai/plugin` dependency in `~/.config/opencode/package.json`.
 
 </details>
 
