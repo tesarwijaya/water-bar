@@ -1,0 +1,14 @@
+{
+  "name": "water-bar",
+  "description": "Estimate the water your Claude Code sessions consume, from token usage.",
+  "owner": {
+    "name": "tesarwijaya"
+  },
+  "plugins": [
+    {
+      "name": "water-bar",
+      "source": "./",
+      "description": "Band above the prompt: this session's water estimate, model, context, cost and a region picker."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Node
+node_modules/
+package-lock.json
+
+# OS / editor
+.DS_Store
+
+# Types and tsconfig Claude Code lays beside a mod it loads with --plugin-dir
+.claude-plugin/types/
+/tsconfig.json
