@@ -1,6 +1,6 @@
 {
   "name": "water-bar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Estimate the water consumed by the current OpenCode session from token usage (sidebar section + water_bar tool). The repo root is the plugin root; the estimator is ./core.",
